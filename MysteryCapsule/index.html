@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Digital Capsule</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Google Fonts for Handwriting Effect -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <style>
+        .pixel-font { font-family: 'Press Start 2P', monospace; }
+        .handwriting-font { font-family: 'Caveat', cursive; }
+        .option-card { cursor: pointer; transition: all 0.2s ease; }
+        .option-card:hover { border-color: #ec4899; transform: scale(1.05); }
+        .selected { border-color: #ec4899 !important; background-color: rgba(236, 72, 153, 0.1); }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex flex-col items-center justify-center p-4 select-none">
+
+    <!-- VIEW 1: CREATOR FORM -->
+    <div id="creator-view" class="w-full max-w-md bg-zinc-900 border border-zinc-800 p-6 rounded-2xl shadow-xl flex flex-col gap-5">
+        <div class="text-center flex flex-col items-center gap-2">
+            <!-- Capsule Graphic Preview (Starts Open) -->
+            <img id="creator-capsule-img" src="assets/open-capsule.png" class="w-16 h-16 object-contain animate-pulse">
+            <h1 class="pixel-font text-[11px] text-pink-400">Pack Your Capsule ✨</h1>
+            <p class="text-[11px] text-zinc-400">Fill the open capsule with your memories.</p>
+        </div>
+
+        <!-- 1. Choose Pixel Buddy -->
+        <div>
+            <label class="text-[11px] font-bold text-zinc-300 block mb-2">1. Choose Your Pixel Buddy:</label>
+            <div class="grid grid-cols-5 gap-2" id="buddy-selector">
+                <div onclick="selectItem('buddy', 'assets/buddy1.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center selected"><img src="assets/buddy1.png" class="w-7 h-7 object-contain"></div>
+                <div onclick="selectItem('buddy', 'assets/buddy2.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center"><img src="assets/buddy2.png" class="w-7 h-7 object-contain"></div>
+                <div onclick="selectItem('buddy', 'assets/buddy3.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center"><img src="assets/buddy3.png" class="w-7 h-7 object-contain"></div>
+                <div onclick="selectItem('buddy', 'assets/buddy4.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center"><img src="assets/buddy4.png" class="w-7 h-7 object-contain"></div>
+                <div onclick="selectItem('buddy', 'assets/buddy5.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center"><img src="assets/buddy5.png" class="w-7 h-7 object-contain"></div>
+            </div>
+        </div>
+
+        <!-- 2. Choose Flower Graphic -->
+        <div>
+            <label class="text-[11px] font-bold text-zinc-300 block mb-2">2. Choose a Flower Graphic:</label>
+            <div class="grid grid-cols-5 gap-2" id="flower-selector">
+                <div onclick="selectItem('flower', 'assets/flower1.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center selected"><img src="assets/flower1.png" class="w-7 h-7 object-contain"></div>
+                <div onclick="selectItem('flower', 'assets/flower2.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center"><img src="assets/flower2.png" class="w-7 h-7 object-contain"></div>
+                <div onclick="selectItem('flower', 'assets/flower3.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center"><img src="assets/flower3.png" class="w-7 h-7 object-contain"></div>
+                <div onclick="selectItem('flower', 'assets/flower4.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center"><img src="assets/flower4.png" class="w-7 h-7 object-contain"></div>
+                <div onclick="selectItem('flower', 'assets/flower5.png', this)" class="option-card border border-zinc-800 bg-zinc-950 p-2 rounded-xl flex items-center justify-center"><img src="assets/flower5.png" class="w-7 h-7 object-contain"></div>
+            </div>
+        </div>
+
+        <!-- Text Inputs & Spotify -->
+        <div class="flex flex-col gap-3">
+            <div>
+                <label class="text-[11px] font-bold text-zinc-300 block mb-1">3. Personal Note (Handwriting Style):</label>
+                <textarea id="input-note" placeholder="Write something sweet..." class="w-full bg-zinc-950 border border-zinc-800 p-3 rounded-xl text-lg text-pink-200 handwriting-font focus:outline-none focus:border-pink-500 h-20 resize-none"></textarea>
+            </div>
+            <div>
+                <label class="text-[11px] font-bold text-zinc-300 block mb-1">4. Spotify Track Link:</label>
+                <input type="text" id="input-spotify" placeholder="Paste Spotify track link (e.g. open.spotify.com/track/...)" class="w-full bg-zinc-950 border border-zinc-800 p-3 rounded-xl text-xs text-zinc-200 focus:outline-none focus:border-pink-500">
+            </div>
+        </div>
+
+        <!-- Generate Link Button -->
+        <button onclick="generateLink()" class="w-full py-3 bg-pink-600 hover:bg-pink-500 pixel-font text-[11px] font-bold rounded-xl shadow-lg cursor-pointer transition transform hover:scale-[1.02]">
+            Seal Capsule & Get Link 🔒
+        </button>
+
+        <!-- Output Link Box -->
+        <div id="link-output-box" class="hidden flex flex-col gap-2 p-3 bg-zinc-950 border border-zinc-800 rounded-xl">
+            <span class="text-[10px] text-zinc-400">Your sealed capsule link is ready! Copy and send it:</span>
+            <input type="text" id="generated-link" readonly class="w-full bg-zinc-900 border border-zinc-800 p-2 rounded text-[10px] text-pink-400 select-all">
+        </div>
+    </div>
+
+
+    <!-- VIEW 2: RECEIVER / UNLOCK VIEW (Shows Closed Capsule) -->
+    <div id="receiver-view" class="hidden flex flex-col items-center gap-5 max-w-xs w-full text-center">
+        <div class="flex items-center justify-center gap-4">
+            <img id="display-buddy" src="" class="w-14 h-14 object-contain animate-bounce">
+            <span class="text-zinc-600 text-lg">+</span>
+            <!-- Starts closed for the receiver -->
+            <img src="assets/closed-capsule.png" class="w-14 h-14 object-contain">
+        </div>
+        <h1 class="pixel-font text-[11px] text-pink-400">A sealed capsule was left for you...</h1>
+        <p class="text-zinc-400 text-xs">Your pixel buddy is guarding it.</p>
+        
+        <button onclick="openCapsule()" class="w-full py-3 bg-pink-600 hover:bg-pink-500 pixel-font text-[11px] font-bold rounded-xl shadow-lg cursor-pointer transition transform hover:scale-105">
+            Break Seal & Open 🗝️
+        </button>
+    </div>
+
+
+    <!-- VIEW 3: REVEALED CONTENT (Shows Open Capsule + Note + Spotify) -->
+    <div id="content-view" class="hidden flex flex-col items-center gap-4 p-6 bg-zinc-900 border border-zinc-800 rounded-2xl max-w-sm w-full text-center shadow-2xl">
+        <div class="flex items-center gap-3">
+            <img src="assets/open-capsule.png" class="w-10 h-10 object-contain">
+            <img id="display-flower" src="" class="w-10 h-10 object-contain">
+        </div>
+        <h2 class="pixel-font text-[11px] text-pink-400">Capsule Opened! 🎉</h2>
+        
+        <div class="w-full flex flex-col gap-3 text-left">
+            <!-- Handwriting Note Display -->
+            <div class="p-4 bg-zinc-950 rounded-xl border border-zinc-800 shadow-inner">
+                <span class="text-[9px] text-zinc-500 pixel-font block mb-1">NOTE:</span>
+                <p id="display-note" class="text-2xl text-pink-200 handwriting-font whitespace-pre-wrap">...</p>
+            </div>
+
+            <!-- Spotify Player Embed -->
+            <div id="spotify-container" class="w-full hidden">
+                <span class="text-[9px] text-zinc-500 pixel-font block mb-1">SOUNDTRACK:</span>
+                <iframe id="spotify-iframe" style="border-radius:12px" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <button onclick="resetToCreator()" class="mt-2 text-[10px] text-zinc-500 hover:text-zinc-300 underline cursor-pointer">
+            Create your own capsule
+        </button>
+    </div>
+
+    <script>
+        let selections = {
+            buddy: 'assets/buddy1.png',
+            flower: 'assets/flower1.png'
+        };
+
+        function selectItem(category, path, element) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('div').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selections[category] = path;
+        }
+
+        // Helper to convert regular Spotify link into an embed link
+        function getSpotifyEmbedUrl(url) {
+            if (!url) return null;
+            // Matches https://open.spotify.com/track/TRACK_ID...
+            const match = url.match(/track\/([a-zA-Z0-9]+)/);
+            if (match && match[1]) {
+                return `https://open.spotify.com/embed/track/${match[1]}?utm_source=generator&theme=0`;
+            }
+            return null;
+        }
+
+        function generateLink() {
+            const note = document.getElementById('input-note').value.trim();
+            const spotifyUrl = document.getElementById('input-spotify').value.trim();
+
+            if (!note) {
+                alert("Please write a personal note first!");
+                return;
+            }
+
+            const payload = {
+                b: selections.buddy,
+                f: selections.flower,
+                n: note,
+                s: getSpotifyEmbedUrl(spotifyUrl)
+            };
+
+            const encodedData = btoa(encodeURIComponent(JSON.stringify(payload)));
+            const shareableLink = window.location.origin + window.location.pathname + "?data=" + encodedData;
+
+            document.getElementById('link-output-box').classList.remove('hidden');
+            document.getElementById('generated-link').value = shareableLink;
+        }
+
+        function openCapsule() {
+            document.getElementById('receiver-view').classList.add('hidden');
+            document.getElementById('content-view').classList.remove('hidden');
+        }
+
+        function resetToCreator() {
+            window.location.href = window.location.pathname;
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataParam = urlParams.get('data');
+
+            if (dataParam) {
+                try {
+                    const decodedPayload = JSON.parse(decodeURIComponent(atob(dataParam)));
+                    
+                    document.getElementById('display-buddy').src = decodedPayload.b || 'assets/buddy1.png';
+                    document.getElementById('display-flower').src = decodedPayload.f || 'assets/flower1.png';
+                    document.getElementById('display-note').innerText = decodedPayload.n || "";
+
+                    // Handle Spotify embed
+                    if (decodedPayload.s) {
+                        document.getElementById('spotify-iframe').src = decodedPayload.s;
+                        document.getElementById('spotify-container').classList.remove('hidden');
+                    }
+
+                    document.getElementById('creator-view').classList.add('hidden');
+                    document.getElementById('receiver-view').classList.remove('hidden');
+                } catch (e) {
+                    console.error("Invalid link data");
+                }
+            }
+        };
+    </script>
+</body>
+</html>
