@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: The Capsule Preview Box (Using capsule2.png for packing) -->
+        <!-- RIGHT COLUMN: The Capsule Preview Box -->
         <div class="bg-white/80 border-4 border-pink-200 p-12 rounded-[3rem] flex flex-col items-center justify-center gap-6 text-center shadow-2xl h-full min-h-[500px]">
             <div class="relative flex items-center justify-center my-6">
                 <img src="assets/capsule2.png" class="w-60 h-60 object-contain drop-shadow-xl">
@@ -104,7 +104,7 @@
     </div>
 
 
-    <!-- VIEW 3: RECEIVER - PIC 2 FORMAT (Opened contents layout with original Spotify widget) -->
+    <!-- VIEW 3: RECEIVER - PIC 2 FORMAT (Opened contents layout with Embedded Spotify Player) -->
     <div id="receiver-view-2" class="hidden w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-4">
         
         <!-- Left: Capsule 2 -->
@@ -112,7 +112,7 @@
             <img src="assets/capsule2.png" class="w-80 h-80 object-contain drop-shadow-2xl">
         </div>
 
-        <!-- Right: Floating Elements & Original Spotify Card -->
+        <!-- Right: Floating Elements & Embedded Spotify Player -->
         <div class="flex flex-col gap-6 items-center justify-center">
             
             <!-- Buddy -->
@@ -130,18 +130,9 @@
                 <p id="display-note" class="text-amber-900 handwriting-font whitespace-pre-wrap leading-relaxed text-center">...</p>
             </div>
 
-            <!-- Original Spotify Widget Card -->
-            <div id="spotify-widget-container" class="hidden w-full bg-emerald-50/90 border-4 border-emerald-200 p-4 rounded-[2.5rem] shadow-lg flex items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="text-3xl bg-white p-3 rounded-2xl shadow-sm">🎵</div>
-                    <div class="flex flex-col">
-                        <span class="playful-font text-emerald-800 font-bold text-sm">spotify song</span>
-                        <span id="spotify-link-text" class="text-xs text-emerald-600 truncate max-w-[180px]">Attached song link</span>
-                    </div>
-                </div>
-                <a id="spotify-play-btn" href="#" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white playful-font font-bold px-6 py-3 rounded-2xl text-sm transition shadow cursor-pointer">
-                    Listen 🎧
-                </a>
+            <!-- Embedded Spotify Player Container -->
+            <div id="spotify-player-container" class="hidden w-full rounded-[2rem] overflow-hidden shadow-lg border-4 border-emerald-200 bg-white">
+                <iframe id="spotify-iframe" style="border-radius:12px" src="" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
 
             <button onclick="resetToCreator()" class="mt-2 text-center text-sm text-pink-400 hover:text-pink-600 playful-font font-bold underline cursor-pointer">
@@ -233,6 +224,21 @@
             window.location.href = window.location.pathname;
         }
 
+        // Helper to convert standard Spotify track links to clean embed URLs
+        function getSpotifyEmbedUrl(url) {
+            try {
+                if (!url.includes('spotify.com')) return null;
+                // Matches track links like https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh?...
+                const match = url.match(/track\/([a-zA-Z0-9]+)/);
+                if (match && match[1]) {
+                    return `https://open.spotify.com/embed/track/${match[1]}?utm_source=generator&theme=0`;
+                }
+            } catch (e) {
+                console.error("Error parsing spotify URL", e);
+            }
+            return null;
+        }
+
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const dataParam = urlParams.get('data');
@@ -246,9 +252,11 @@
                     document.getElementById('display-note').innerText = decodedPayload.n || "";
 
                     if (decodedPayload.s) {
-                        document.getElementById('spotify-play-btn').href = decodedPayload.s;
-                        document.getElementById('spotify-link-text').innerText = decodedPayload.s;
-                        document.getElementById('spotify-widget-container').classList.remove('hidden');
+                        const embedUrl = getSpotifyEmbedUrl(decodedPayload.s);
+                        if (embedUrl) {
+                            document.getElementById('spotify-iframe').src = embedUrl;
+                            document.getElementById('spotify-player-container').classList.remove('hidden');
+                        }
                     }
 
                     document.getElementById('creator-view').classList.add('hidden');
