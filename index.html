@@ -37,8 +37,8 @@
                 <h2 class="playful-font text-2xl text-purple-500 font-bold tracking-wide text-center">Pick your flower !</h2>
                 <div class="flex items-center justify-between px-4">
                     <button onclick="changeFlower(-1)" class="text-purple-400 hover:text-purple-600 font-bold text-4xl px-3 cursor-pointer transition transform hover:scale-125">&lt;</button>
-                    <div class="h-44 flex items-center justify-center p-2">
-                        <img id="preview-flower-img" src="assets/flower1.png" class="w-40 h-40 object-contain drop-shadow-md">
+                    <div class="h-48 flex items-center justify-center p-2">
+                        <img id="preview-flower-img" src="assets/flower1.png" class="w-44 h-44 object-contain drop-shadow-md">
                     </div>
                     <button onclick="changeFlower(1)" class="text-purple-400 hover:text-purple-600 font-bold text-4xl px-3 cursor-pointer transition transform hover:scale-125">&gt;</button>
                 </div>
@@ -66,20 +66,25 @@
                 Next Step ➔
             </button>
             
-            <!-- Output Link Box -->
+            <!-- Output Link Box with Copy Button -->
             <div id="link-output-box" class="hidden flex flex-col gap-3 p-6 bg-white border-4 border-pink-200 rounded-[2.5rem] shadow-xl">
                 <span class="text-sm text-pink-500 playful-font font-bold">Your link is ready! Copy and share:</span>
-                <input type="text" id="generated-link" readonly class="w-full bg-pink-50 border-2 border-pink-100 p-4 rounded-2xl text-xs text-pink-600 select-all font-mono">
+                <div class="flex items-center gap-2">
+                    <input type="text" id="generated-link" readonly class="w-full bg-pink-50 border-2 border-pink-100 p-4 rounded-2xl text-xs text-pink-600 select-all font-mono">
+                    <button onclick="copyLink()" class="bg-pink-400 hover:bg-pink-500 text-white playful-font font-bold px-5 py-4 rounded-2xl text-sm transition shadow cursor-pointer whitespace-nowrap">
+                        Copy 📋
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: The Capsule Preview Box -->
+        <!-- RIGHT COLUMN: The Capsule Preview Box (Using capsule2.png for packing) -->
         <div class="bg-white/80 border-4 border-pink-200 p-12 rounded-[3rem] flex flex-col items-center justify-center gap-6 text-center shadow-2xl h-full min-h-[500px]">
             <div class="relative flex items-center justify-center my-6">
-                <img src="assets/capsule1.png" class="w-56 h-56 object-contain drop-shadow-xl">
+                <img src="assets/capsule2.png" class="w-60 h-60 object-contain drop-shadow-xl">
                 <div class="absolute flex items-center gap-4">
-                    <img id="capsule-buddy-preview" src="assets/buddy1.png" class="w-20 h-20 object-contain drop-shadow-md">
-                    <img id="capsule-flower-preview" src="assets/flower1.png" class="w-32 h-32 object-contain drop-shadow-md">
+                    <img id="capsule-buddy-preview" src="assets/buddy1.png" class="w-24 h-24 object-contain drop-shadow-md">
+                    <img id="capsule-flower-preview" src="assets/flower1.png" class="w-48 h-48 object-contain drop-shadow-md">
                 </div>
             </div>
             <p id="capsule-status-text" class="text-pink-400 handwriting-font text-3xl">Packing items into your capsule...</p>
@@ -107,26 +112,30 @@
             <img src="assets/capsule2.png" class="w-80 h-80 object-contain drop-shadow-2xl">
         </div>
 
-        <!-- Right: Floating Big Cards (Buddy, Flower, Note, Spotify) -->
-        <div class="flex flex-col gap-6">
-            <!-- Buddy Card -->
-            <div class="bg-white/90 border-4 border-pink-200 p-6 rounded-[2.5rem] shadow-lg flex items-center justify-center">
-                <img id="display-buddy" src="" class="w-28 h-28 object-contain drop-shadow-md">
+        <!-- Right: Floating Big Elements (No background boxes, massive flower) -->
+        <div class="flex flex-col gap-8 items-center justify-center">
+            
+            <!-- Buddy (No box) -->
+            <div class="flex items-center justify-center">
+                <img id="display-buddy" src="" class="w-32 h-32 object-contain drop-shadow-md">
             </div>
 
-            <!-- Flower Card (Massive) -->
-            <div class="bg-white/90 border-4 border-purple-200 p-6 rounded-[2.5rem] shadow-lg flex items-center justify-center">
-                <img id="display-flower" src="" class="w-40 h-40 object-contain drop-shadow-md">
+            <!-- Flower (Massive, no box) -->
+            <div class="flex items-center justify-center">
+                <img id="display-flower" src="" class="w-56 h-56 object-contain drop-shadow-md">
             </div>
 
             <!-- Note Card with custom background look -->
-            <div class="bg-amber-50/90 border-4 border-amber-200 p-8 rounded-[2.5rem] shadow-lg flex flex-col gap-2">
+            <div class="w-full bg-amber-50/90 border-4 border-amber-200 p-8 rounded-[2.5rem] shadow-lg flex flex-col gap-2">
                 <p id="display-note" class="text-4xl text-amber-900 handwriting-font whitespace-pre-wrap leading-relaxed text-center">...</p>
             </div>
 
-            <!-- Spotify Song Card -->
-            <div id="spotify-card-container" class="hidden bg-white/90 border-4 border-emerald-200 p-6 rounded-[2.5rem] shadow-lg flex flex-col gap-2">
-                <iframe id="spotify-iframe" style="border-radius:16px" width="100%" height="90" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <!-- Spotify Song Link Icon -->
+            <div id="spotify-link-container" class="hidden">
+                <a id="spotify-icon-link" href="#" target="_blank" class="flex items-center gap-3 bg-white/90 border-4 border-emerald-200 px-8 py-4 rounded-full shadow-lg hover:scale-105 transition transform cursor-pointer">
+                    <span class="text-4xl">🎵</span>
+                    <span class="playful-font text-emerald-700 font-bold text-lg">Listen to Spotify Song</span>
+                </a>
             </div>
 
             <button onclick="resetToCreator()" class="mt-2 text-center text-sm text-pink-400 hover:text-pink-600 playful-font font-bold underline cursor-pointer">
@@ -176,15 +185,6 @@
             }
         }
 
-        function getSpotifyEmbedUrl(url) {
-            if (!url) return null;
-            const match = url.match(/track\/([a-zA-Z0-9]+)/);
-            if (match && match[1]) {
-                return `https://open.spotify.com/embed/track/${match[1]}?utm_source=generator&theme=0`;
-            }
-            return null;
-        }
-
         function generateLink() {
             const note = document.getElementById('input-note').value.trim();
             const spotifyUrl = document.getElementById('input-spotify').value.trim();
@@ -198,7 +198,7 @@
                 b: buddies[currentBuddyIdx],
                 f: flowers[currentFlowerIdx],
                 n: note,
-                s: getSpotifyEmbedUrl(spotifyUrl)
+                s: spotifyUrl || null
             };
 
             const encodedData = btoa(encodeURIComponent(JSON.stringify(payload)));
@@ -208,6 +208,14 @@
             document.getElementById('step-note').classList.add('hidden');
             document.getElementById('link-output-box').classList.remove('hidden');
             document.getElementById('generated-link').value = shareableLink;
+        }
+
+        function copyLink() {
+            const linkInput = document.getElementById('generated-link');
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(linkInput.value);
+            alert("Link copied to clipboard! ✨");
         }
 
         function openReceiverCapsule() {
@@ -232,8 +240,8 @@
                     document.getElementById('display-note').innerText = decodedPayload.n || "";
 
                     if (decodedPayload.s) {
-                        document.getElementById('spotify-iframe').src = decodedPayload.s;
-                        document.getElementById('spotify-card-container').classList.remove('hidden');
+                        document.getElementById('spotify-icon-link').href = decodedPayload.s;
+                        document.getElementById('spotify-link-container').classList.remove('hidden');
                     }
 
                     document.getElementById('creator-view').classList.add('hidden');
