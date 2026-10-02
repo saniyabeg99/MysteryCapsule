@@ -22,42 +22,42 @@
             
             <!-- STEP 1: BUDDY SELECTOR -->
             <div id="step-buddy" class="step-card bg-white/80 border-4 border-pink-200 p-8 rounded-[2.5rem] shadow-xl flex flex-col gap-4">
-                <h2 class="playful-font text-2xl text-pink-500 font-bold tracking-wide">pick your Pixel buddy !</h2>
-                <div class="bg-pink-50 border-2 border-pink-100 p-6 rounded-3xl flex items-center justify-between">
-                    <button onclick="changeBuddy(-1)" class="text-pink-400 hover:text-pink-600 font-bold text-4xl px-4 cursor-pointer transition transform hover:scale-125">&lt;</button>
-                    <div class="h-36 flex items-center justify-center p-2">
-                        <img id="preview-buddy-img" src="assets/buddy1.png" class="w-32 h-32 object-contain drop-shadow-md">
+                <h2 class="playful-font text-2xl text-pink-500 font-bold tracking-wide text-center">Pick your Pixel buddy !</h2>
+                <div class="flex items-center justify-between px-4">
+                    <button onclick="changeBuddy(-1)" class="text-pink-400 hover:text-pink-600 font-bold text-4xl px-3 cursor-pointer transition transform hover:scale-125">&lt;</button>
+                    <div class="h-40 flex items-center justify-center p-2">
+                        <img id="preview-buddy-img" src="assets/buddy1.png" class="w-28 h-28 object-contain drop-shadow-md">
                     </div>
-                    <button onclick="changeBuddy(1)" class="text-pink-400 hover:text-pink-600 font-bold text-4xl px-4 cursor-pointer transition transform hover:scale-125">&gt;</button>
+                    <button onclick="changeBuddy(1)" class="text-pink-400 hover:text-pink-600 font-bold text-4xl px-3 cursor-pointer transition transform hover:scale-125">&gt;</button>
                 </div>
             </div>
 
             <!-- STEP 2: FLOWER SELECTOR -->
             <div id="step-flower" class="step-card hidden bg-white/80 border-4 border-purple-200 p-8 rounded-[2.5rem] shadow-xl flex flex-col gap-4">
-                <h2 class="playful-font text-2xl text-purple-500 font-bold tracking-wide">pick your flower !</h2>
-                <div class="bg-purple-50 border-2 border-purple-100 p-6 rounded-3xl flex items-center justify-between">
-                    <button onclick="changeFlower(-1)" class="text-purple-400 hover:text-purple-600 font-bold text-4xl px-4 cursor-pointer transition transform hover:scale-125">&lt;</button>
-                    <div class="h-36 flex items-center justify-center p-2">
-                        <img id="preview-flower-img" src="assets/flower1.png" class="w-32 h-32 object-contain drop-shadow-md">
+                <h2 class="playful-font text-2xl text-purple-500 font-bold tracking-wide text-center">Pick your flower !</h2>
+                <div class="flex items-center justify-between px-4">
+                    <button onclick="changeFlower(-1)" class="text-purple-400 hover:text-purple-600 font-bold text-4xl px-3 cursor-pointer transition transform hover:scale-125">&lt;</button>
+                    <div class="h-44 flex items-center justify-center p-2">
+                        <img id="preview-flower-img" src="assets/flower1.png" class="w-40 h-40 object-contain drop-shadow-md">
                     </div>
-                    <button onclick="changeFlower(1)" class="text-purple-400 hover:text-purple-600 font-bold text-4xl px-4 cursor-pointer transition transform hover:scale-125">&gt;</button>
+                    <button onclick="changeFlower(1)" class="text-purple-400 hover:text-purple-600 font-bold text-4xl px-3 cursor-pointer transition transform hover:scale-125">&gt;</button>
                 </div>
             </div>
 
             <!-- STEP 3: SONG SELECTOR -->
             <div id="step-song" class="step-card hidden bg-white/80 border-4 border-emerald-200 p-8 rounded-[2.5rem] shadow-xl flex flex-col gap-4">
-                <h2 class="playful-font text-2xl text-emerald-600 font-bold tracking-wide">pick your song !</h2>
-                <div class="bg-emerald-50 border-2 border-emerald-100 p-6 rounded-3xl flex items-center gap-4">
+                <h2 class="playful-font text-2xl text-emerald-600 font-bold tracking-wide text-center">Pick your song !</h2>
+                <div class="flex items-center gap-4 px-2">
                     <div class="text-4xl shrink-0">🎵</div>
-                    <input type="text" id="input-spotify" placeholder="Paste Spotify track link..." class="w-full bg-white border-2 border-emerald-200 p-4 rounded-2xl text-base text-zinc-700 playful-font focus:outline-none focus:border-emerald-400">
+                    <input type="text" id="input-spotify" placeholder="Paste Spotify track link..." class="w-full bg-emerald-50/50 border-2 border-emerald-200 p-4 rounded-2xl text-base text-zinc-700 playful-font focus:outline-none focus:border-emerald-400">
                 </div>
             </div>
 
             <!-- STEP 4: NOTE WRITER -->
             <div id="step-note" class="step-card hidden bg-white/80 border-4 border-amber-200 p-8 rounded-[2.5rem] shadow-xl flex flex-col gap-4">
-                <h2 class="playful-font text-2xl text-amber-600 font-bold tracking-wide">Write a note !</h2>
-                <div class="bg-amber-50 border-2 border-amber-100 p-6 rounded-3xl">
-                    <textarea id="input-note" placeholder="Write text here..." class="w-full bg-white border-2 border-amber-200 p-5 rounded-2xl text-3xl text-amber-900 handwriting-font focus:outline-none focus:border-amber-400 h-40 resize-none"></textarea>
+                <h2 class="playful-font text-2xl text-amber-600 font-bold tracking-wide text-center">Write a note !</h2>
+                <div class="px-2">
+                    <textarea id="input-note" placeholder="Write text here..." class="w-full bg-amber-50/60 border-2 border-amber-200 p-5 rounded-3xl text-3xl text-amber-900 handwriting-font focus:outline-none focus:border-amber-400 h-40 resize-none shadow-inner"></textarea>
                 </div>
             </div>
 
@@ -75,67 +75,61 @@
 
         <!-- RIGHT COLUMN: The Capsule Preview Box -->
         <div class="bg-white/80 border-4 border-pink-200 p-12 rounded-[3rem] flex flex-col items-center justify-center gap-6 text-center shadow-2xl h-full min-h-[500px]">
-            <span class="playful-font text-lg text-pink-400 font-bold">capsule png</span>
             <div class="relative flex items-center justify-center my-6">
-                <img src="assets/capsule1.png" class="w-52 h-52 object-contain drop-shadow-xl">
+                <img src="assets/capsule1.png" class="w-56 h-56 object-contain drop-shadow-xl">
                 <div class="absolute flex items-center gap-4">
                     <img id="capsule-buddy-preview" src="assets/buddy1.png" class="w-20 h-20 object-contain drop-shadow-md">
-                    <img id="capsule-flower-preview" src="assets/flower1.png" class="w-20 h-20 object-contain drop-shadow-md">
+                    <img id="capsule-flower-preview" src="assets/flower1.png" class="w-32 h-32 object-contain drop-shadow-md">
                 </div>
             </div>
-            <p id="capsule-status-text" class="text-pink-500 handwriting-font text-3xl">Packing items into your capsule...</p>
+            <p id="capsule-status-text" class="text-pink-400 handwriting-font text-3xl">Packing items into your capsule...</p>
         </div>
     </div>
 
 
     <!-- VIEW 2: RECEIVER - PIC 1 FORMAT (Click capsule1 to open) -->
     <div id="receiver-view-1" class="hidden flex flex-col items-center gap-8 max-w-lg w-full text-center">
-        <h1 class="playful-font text-3xl text-pink-500 font-bold drop-shadow-sm">Open your capsule!</h1>
+        <h1 class="playful-font text-4xl text-pink-500 font-bold drop-shadow-sm">Open your capsule!</h1>
         
         <div onclick="openReceiverCapsule()" class="cursor-pointer transition transform hover:scale-105 active:scale-95 p-6">
-            <img src="assets/capsule1.png" class="w-64 h-64 object-contain drop-shadow-2xl animate-pulse">
+            <img src="assets/capsule1.png" class="w-72 h-72 object-contain drop-shadow-2xl animate-pulse">
         </div>
         
-        <p class="text-pink-400 playful-font text-lg font-medium">Tap the capsule to break the seal 🗝️</p>
+        <p class="text-pink-400 playful-font text-xl font-medium">Tap the capsule to break the seal 🗝️</p>
     </div>
 
 
     <!-- VIEW 3: RECEIVER - PIC 2 FORMAT (Opened contents layout) -->
-    <div id="receiver-view-2" class="hidden w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-4">
+    <div id="receiver-view-2" class="hidden w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-4">
         
-        <!-- Left: Capsule 2 -->
-        <div class="flex flex-col items-center justify-center bg-white/80 border-4 border-pink-200 p-12 rounded-[3rem] shadow-xl">
-            <img src="assets/capsule2.png" class="w-64 h-64 object-contain drop-shadow-2xl">
-            <h2 class="playful-font text-xl text-pink-500 font-bold mt-4">Opened Capsule</h2>
+        <!-- Left: Capsule 2 (No text) -->
+        <div class="flex flex-col items-center justify-center">
+            <img src="assets/capsule2.png" class="w-80 h-80 object-contain drop-shadow-2xl">
         </div>
 
-        <!-- Right: Floating Big Cards (Buddy, Flower, Note, Spotify) matching Pic 2 -->
-        <div class="flex flex-col gap-5">
+        <!-- Right: Floating Big Cards (Buddy, Flower, Note, Spotify) -->
+        <div class="flex flex-col gap-6">
             <!-- Buddy Card -->
-            <div class="bg-white/90 border-4 border-pink-200 p-5 rounded-[2rem] shadow-lg flex items-center gap-6">
-                <span class="playful-font text-sm text-pink-400 font-bold w-24">buddypng</span>
-                <img id="display-buddy" src="" class="w-24 h-24 object-contain drop-shadow-md">
+            <div class="bg-white/90 border-4 border-pink-200 p-6 rounded-[2.5rem] shadow-lg flex items-center justify-center">
+                <img id="display-buddy" src="" class="w-28 h-28 object-contain drop-shadow-md">
             </div>
 
-            <!-- Flower Card -->
-            <div class="bg-white/90 border-4 border-purple-200 p-5 rounded-[2rem] shadow-lg flex items-center gap-6">
-                <span class="playful-font text-sm text-purple-400 font-bold w-24">flowerpng</span>
-                <img id="display-flower" src="" class="w-24 h-24 object-contain drop-shadow-md">
+            <!-- Flower Card (Massive) -->
+            <div class="bg-white/90 border-4 border-purple-200 p-6 rounded-[2.5rem] shadow-lg flex items-center justify-center">
+                <img id="display-flower" src="" class="w-40 h-40 object-contain drop-shadow-md">
             </div>
 
-            <!-- Note Card -->
-            <div class="bg-white/90 border-4 border-amber-200 p-6 rounded-[2rem] shadow-lg flex flex-col gap-2">
-                <span class="playful-font text-sm text-amber-500 font-bold">the note</span>
-                <p id="display-note" class="text-4xl text-amber-900 handwriting-font whitespace-pre-wrap leading-relaxed">...</p>
+            <!-- Note Card with custom background look -->
+            <div class="bg-amber-50/90 border-4 border-amber-200 p-8 rounded-[2.5rem] shadow-lg flex flex-col gap-2">
+                <p id="display-note" class="text-4xl text-amber-900 handwriting-font whitespace-pre-wrap leading-relaxed text-center">...</p>
             </div>
 
             <!-- Spotify Song Card -->
-            <div id="spotify-card-container" class="hidden bg-white/90 border-4 border-emerald-200 p-5 rounded-[2rem] shadow-lg flex flex-col gap-2">
-                <span class="playful-font text-sm text-emerald-600 font-bold">spotify song</span>
+            <div id="spotify-card-container" class="hidden bg-white/90 border-4 border-emerald-200 p-6 rounded-[2.5rem] shadow-lg flex flex-col gap-2">
                 <iframe id="spotify-iframe" style="border-radius:16px" width="100%" height="90" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
 
-            <button onclick="resetToCreator()" class="mt-4 py-3 text-center text-sm text-pink-400 hover:text-pink-600 playful-font font-bold underline cursor-pointer">
+            <button onclick="resetToCreator()" class="mt-2 text-center text-sm text-pink-400 hover:text-pink-600 playful-font font-bold underline cursor-pointer">
                 Create your own capsule ✨
             </button>
         </div>
