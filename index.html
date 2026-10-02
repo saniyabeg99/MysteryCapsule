@@ -6,10 +6,10 @@
     <title>Cozy Digital Capsule</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         .playful-font { font-family: 'Fredoka', cursive, sans-serif; }
-        .handwriting-font { font-family: 'Caveat', cursive; }
+        .handwriting-font { font-family: 'Great Vibes', cursive; font-size: 2.5rem; line-height: 1.4; }
     </style>
 </head>
 <body class="bg-[#FFF0F5] text-zinc-700 min-h-screen flex flex-col items-center justify-center p-6 select-none">
@@ -104,37 +104,43 @@
     </div>
 
 
-    <!-- VIEW 3: RECEIVER - PIC 2 FORMAT (Opened contents layout) -->
+    <!-- VIEW 3: RECEIVER - PIC 2 FORMAT (Opened contents layout with original Spotify widget) -->
     <div id="receiver-view-2" class="hidden w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-4">
         
-        <!-- Left: Capsule 2 (No text) -->
+        <!-- Left: Capsule 2 -->
         <div class="flex flex-col items-center justify-center">
             <img src="assets/capsule2.png" class="w-80 h-80 object-contain drop-shadow-2xl">
         </div>
 
-        <!-- Right: Floating Big Elements (No background boxes, massive flower) -->
-        <div class="flex flex-col gap-8 items-center justify-center">
+        <!-- Right: Floating Elements & Original Spotify Card -->
+        <div class="flex flex-col gap-6 items-center justify-center">
             
-            <!-- Buddy (No box) -->
+            <!-- Buddy -->
             <div class="flex items-center justify-center">
                 <img id="display-buddy" src="" class="w-32 h-32 object-contain drop-shadow-md">
             </div>
 
-            <!-- Flower (Massive, no box) -->
+            <!-- Flower (Massive) -->
             <div class="flex items-center justify-center">
                 <img id="display-flower" src="" class="w-56 h-56 object-contain drop-shadow-md">
             </div>
 
-            <!-- Note Card with custom background look -->
+            <!-- Note Card with Romantic Font -->
             <div class="w-full bg-amber-50/90 border-4 border-amber-200 p-8 rounded-[2.5rem] shadow-lg flex flex-col gap-2">
-                <p id="display-note" class="text-4xl text-amber-900 handwriting-font whitespace-pre-wrap leading-relaxed text-center">...</p>
+                <p id="display-note" class="text-amber-900 handwriting-font whitespace-pre-wrap leading-relaxed text-center">...</p>
             </div>
 
-            <!-- Spotify Song Link Icon -->
-            <div id="spotify-link-container" class="hidden">
-                <a id="spotify-icon-link" href="#" target="_blank" class="flex items-center gap-3 bg-white/90 border-4 border-emerald-200 px-8 py-4 rounded-full shadow-lg hover:scale-105 transition transform cursor-pointer">
-                    <span class="text-4xl">🎵</span>
-                    <span class="playful-font text-emerald-700 font-bold text-lg">Listen to Spotify Song</span>
+            <!-- Original Spotify Widget Card -->
+            <div id="spotify-widget-container" class="hidden w-full bg-emerald-50/90 border-4 border-emerald-200 p-4 rounded-[2.5rem] shadow-lg flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="text-3xl bg-white p-3 rounded-2xl shadow-sm">🎵</div>
+                    <div class="flex flex-col">
+                        <span class="playful-font text-emerald-800 font-bold text-sm">spotify song</span>
+                        <span id="spotify-link-text" class="text-xs text-emerald-600 truncate max-w-[180px]">Attached song link</span>
+                    </div>
+                </div>
+                <a id="spotify-play-btn" href="#" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white playful-font font-bold px-6 py-3 rounded-2xl text-sm transition shadow cursor-pointer">
+                    Listen 🎧
                 </a>
             </div>
 
@@ -240,8 +246,9 @@
                     document.getElementById('display-note').innerText = decodedPayload.n || "";
 
                     if (decodedPayload.s) {
-                        document.getElementById('spotify-icon-link').href = decodedPayload.s;
-                        document.getElementById('spotify-link-container').classList.remove('hidden');
+                        document.getElementById('spotify-play-btn').href = decodedPayload.s;
+                        document.getElementById('spotify-link-text').innerText = decodedPayload.s;
+                        document.getElementById('spotify-widget-container').classList.remove('hidden');
                     }
 
                     document.getElementById('creator-view').classList.add('hidden');
